@@ -8,7 +8,7 @@ Singapore is the anchor case. The other nine are Hong Kong, China, Japan,
 Taiwan, South Korea, Germany, the United Kingdom, Australia (NSW), and the
 United States (illustrated by New York City).
 
-The site is built from three source volumes of a comparative regulatory
+The site is built from four source volumes of a comparative regulatory
 dossier (September 2026):
 
 | Vol. | Scope |
@@ -16,6 +16,7 @@ dossier (September 2026):
 | I | Singapore, Hong Kong, UK, Australia, USA, Germany |
 | II | Japan, Taiwan, South Korea — against Singapore |
 | III | China, Hong Kong, Singapore — visual brief |
+| IV | Distance, decibels, and the point of concern — the attenuation formulas, equipment loudness, and measurement-location practice behind every ceiling in Volumes I–III |
 
 ---
 
@@ -32,10 +33,23 @@ dossier (September 2026):
 5. **Noise ceilings** — day vs night limits in dB(A), with the three
    jurisdictions that publish *no fixed number* deliberately omitted rather
    than estimated.
-6. **What a breach costs** — maximum penalties, approximate US$.
-7. **Why the models differ** — density, legal tradition, state structure, and
-   enforcement culture; plus the midday ban as the one genuinely cultural marker.
-8. **Sources** — 19 primary references.
+6. **Distance** *(Volume IV)* — the attenuation formulas behind every ceiling,
+   and where each jurisdiction actually measures: at the site boundary
+   (China, Japan, Taiwan) or at the affected receiver (Singapore, Hong Kong,
+   Germany, the BS 5228-derived UK/Australia).
+7. **Equipment loudness** *(Volume IV)* — Sound Power Level for ten pieces of
+   construction equipment, from a 96 dB wheeled loader to a 122 dB pneumatic
+   breaker.
+8. **A real worked example** *(Volume IV)* — a Hong Kong EIA's own calculation
+   chain from equipment to predicted receptor level at a real 230m distance.
+9. **Turning the formula around** *(Volume IV)* — an illustrative "how far is
+   far enough" calculation, a log-scale distance/decibel curve against real
+   jurisdictional limits, two real enforcement cases, and the source-vs-listener
+   synthesis.
+10. **What a breach costs** — maximum penalties, approximate US$.
+11. **Why the models differ** — density, legal tradition, state structure, and
+    enforcement culture; plus the midday ban as the one genuinely cultural marker.
+12. **Sources** — 34 primary references across all four volumes.
 
 ---
 
@@ -85,10 +99,15 @@ chart, table, and caption — no figure is hard-coded in a component.
 ```
 src/data/
   jurisdictions.ts   the ten jurisdictions: instrument, hours, ceilings,
-                     penalties, enforcement posture, governing logic
+                     penalties, enforcement posture, governing logic, and
+                     (Volume IV) where each one measures its limit
   narrative.ts       weekday timeline bands, the four structural drivers,
                      one-line reads, headline stats
-  sources.ts         19 primary sources + the currency disclaimer
+  distance.ts        Volume IV: attenuation formulas, equipment sound power
+                     levels, the Discovery Bay worked example, distance
+                     thresholds, the illustrative calculation, real cases,
+                     and the source-vs-listener synthesis
+  sources.ts         34 primary sources + the currency disclaimer
 ```
 
 Two fields — `precision` and `enforcement` — are **qualitative 0–10
@@ -103,6 +122,12 @@ bars are **omitted from the chart rather than estimated**, and the omission is
 named in the caption — the absence of a number is one of the report's actual
 findings, not missing data.
 
+South Korea's measurement-location practice (site boundary vs. receiver) is
+not covered by Volume IV's own sources, so the `Distance` section's
+jurisdiction table omits it rather than inferring one — `measuredWhere` and
+`distanceBuiltIn` are optional fields on `Jurisdiction`, populated only for
+the nine jurisdictions the dossier actually documents.
+
 ---
 
 ## Visualization decisions
@@ -116,10 +141,19 @@ Chart colour follows a validated palette rather than taste:
 - **Weekday timeline** — the fixed status palette (good / warning / critical),
   paired with **SVG hatch patterns** and a labelled legend so the state is
   never carried by colour alone.
+- **Equipment loudness** *(Volume IV)* — a single-hue ordinal bar chart
+  (magnitude, one series), sorted descending, with the source-cited min–max
+  range drawn as a floating bar rather than collapsed to one figure.
+- **Distance/decibel curve** *(Volume IV)* — the attenuation relationship is
+  exactly linear in log-distance space, so it's drawn as a straight line
+  rather than sampled points; reference thresholds are recessive dashed
+  lines with direct labels, not competing hues, since they annotate the
+  curve rather than encode a second data series.
 
-All four palettes (light and dark) were run through the data-viz palette
-validator; every check passes. Each chart also ships a hover layer, and the
-ceilings chart has a table view.
+All palettes (light and dark) were run through the data-viz palette
+validator; every check passes. Each chart also ships a hover layer — the
+distance curve adds a pointer-driven crosshair plus keyboard-focusable
+checkpoints — and the ceilings chart has a table view.
 
 ---
 

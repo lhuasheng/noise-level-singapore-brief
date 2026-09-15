@@ -20,6 +20,21 @@ export const sources: Source[] = [
   { n: 17, text: 'NYC Department of Environmental Protection, Noise Code fact sheet; Council Member Ben Kallos, "How We Quieted the Noise in New York City."', host: "nyc.gov · benkallos.com" },
   { n: 18, text: "Umweltpakt Bayern / WEKA guidance summarising AVV Baulärm Immissionsrichtwerte by zone; Bundesverwaltungsgericht decision 7 A 11/11 (2012) on its continuing legal force.", host: "weka.de · gesetze.co" },
   { n: 19, text: 'Rex Deighton-Smith, "Process and performance-based regulation: challenges for regulatory governance and regulatory reform."', host: "onlinepubs.trb.org" },
+  { n: 20, text: "Environmental Protection Department (Hong Kong), Technical Memorandum on Noise from Construction Work other than Percussive Piling (GW-TM) — Area Sensitivity Rating methodology.", host: "epd.gov.hk" },
+  { n: 21, text: "EPD, EIA Report eia_2242014 — Table 5.2/5.3, Area Sensitivity Ratings and Acceptable Noise Levels.", host: "epd.gov.hk" },
+  { n: 22, text: "EPD, EIA Report eia_2182013 — daytime construction noise standards and the 1m façade measurement convention.", host: "epd.gov.hk" },
+  { n: 23, text: "EPD, EIA Report eia_1982011, Appendix 6.5B/6.12B — the 300m assessment cut-off for distant sources.", host: "epd.gov.hk" },
+  { n: 24, text: "EPD, EIA Report eia_2702021, Appendix 4.6 — worked Distance Attenuation = 20·log₁₀(D) + 8 calculation with façade correction.", host: "epd.gov.hk" },
+  { n: 25, text: "EPD, Discovery Bay Area N1 debris-resisting barrier project profile — worked 230m distance-attenuation example.", host: "epd.gov.hk" },
+  { n: 26, text: "EPD press release / Asia Noise News republication — Queen Elizabeth Hospital construction-noise prosecution (20m distance, HK$60,000 fine).", host: "geonoise.asia" },
+  { n: 27, text: "Scottish Power Renewables, Harestanes West Windfarm EIA, Technical Appendix 13.1 — BS 5228 equipment sound power level tables and hard/soft ground attenuation formulas.", host: "scottishpowerrenewables.com" },
+  { n: 28, text: "SSEN Transmission, Wylfa Newydd / A9 Dualling EIA noise-model appendices — further BS 5228 equipment sound power level and sound pressure level reference tables.", host: "planninginspectorate.gov.uk" },
+  { n: 29, text: "UVP-Verbund, German construction-noise assessment reports (Wulkow-Booßen; Straße an der Schule, Berlin) — AVV Baulärm / VDI 2714 distance formula and worked Immissionsrichtwert comparisons.", host: "uvp-verbund.de" },
+  { n: 30, text: "Bavarian State Office for the Environment (LfU), FAQ on AVV Baulärm immission thresholds and the 5 dB(A) mitigation trigger.", host: "umweltpakt.bayern.de" },
+  { n: 31, text: "National Environment Agency (Singapore), Construction Noise Control — the 1m façade measurement clause and full permissible-limit table.", host: "nea.gov.sg" },
+  { n: 32, text: "NEA, Construction Noise Control FAQs — the 150m threshold for mandatory noise meters and the Sunday/public-holiday no-work rule.", host: "nea.gov.sg" },
+  { n: 33, text: "Ministry of Sustainability and the Environment (Singapore), Written Reply to Parliamentary Question on Construction Noise, 6 July 2021 — WHO-referenced basis for the limits and complaint statistics.", host: "mse.gov.sg" },
+  { n: 34, text: "Asia Noise News (geonoise.asia), reported case of a resident's 3am/65dB/150m construction-noise complaint and NEA's \"critical infrastructure\" response.", host: "geonoise.asia" },
 ];
 
 export const disclaimer =

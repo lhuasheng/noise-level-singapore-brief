@@ -7,6 +7,7 @@ const links = [
   { href: "#compare", label: "Compare" },
   { href: "#weekday", label: "The day" },
   { href: "#ceilings", label: "Ceilings" },
+  { href: "#distance", label: "Distance" },
   { href: "#why", label: "Why" },
   { href: "#sources", label: "Sources" },
 ];

@@ -1,5 +1,5 @@
 // Single source of truth for the comparative dossier.
-// Sourced from the three volumes of "Construction Noise Regulation" (Sept 2026).
+// Sourced from the four volumes of "Construction Noise Regulation" (Sept 2026).
 // Figures are general-case, residential-adjacent thresholds as published by each
 // regulator. Verify against the primary source before relying on them for a project.
 
@@ -27,6 +27,10 @@ export type Jurisdiction = {
   dayHours: string;
   nightRule: string;
   ceiling: Ceiling;
+  /** Where the regulator actually measures the limit — site boundary vs. the affected receiver. Volume IV. */
+  measuredWhere?: string;
+  /** Whether distance to the receiver is a direct term in the limit itself. Volume IV; undefined where the dossier does not cover this jurisdiction's practice. */
+  distanceBuiltIn?: string;
   penalty: string;
   /** Approximate USD equivalent of the maximum penalty, where the dossier published one. */
   penaltyUsd: number | null;
@@ -59,6 +63,9 @@ export const jurisdictions: Jurisdiction[] = [
       night: 55,
       note: "90 dBA over any 5-minute window and 75 dBA averaged across 7am–7pm, within 150m of a residential building; the cap tightens twice more, at 7pm and again at 10pm.",
     },
+    measuredWhere: "1m from the exterior of the affected building",
+    distanceBuiltIn:
+      "Yes — sites within 150m of a residential building trigger a stricter tier and mandatory real-time metering",
     penalty: "Up to S$40,000 per offence on conviction",
     penaltyUsd: 29600,
     posture: "proactive",
@@ -85,6 +92,9 @@ export const jurisdictions: Jurisdiction[] = [
       night: null,
       note: "No statutory daytime cap under the Ordinance itself. A 65–75 dBA guideline binds only designated, EIA-assessed projects; the Acceptable Noise Level on a permit is set by the neighbourhood's Area Sensitivity Rating.",
     },
+    measuredWhere: "1m from the external façade of the nearest sensitive receiver",
+    distanceBuiltIn:
+      "Indirectly — the Area Sensitivity Rating and predictive modelling both use distance; sources beyond 300m are routinely excluded from formal assessment",
     penalty:
       "Up to HK$200,000 on repeat offence, plus HK$20,000 per day continuing",
     penaltyUsd: 25600,
@@ -114,6 +124,9 @@ export const jurisdictions: Jurisdiction[] = [
       night: 55,
       note: "A single flat national figure under GB 12523, with no tiering by building type. GB 12523-2025 took effect 1 January 2026, replacing the 2011 version.",
     },
+    measuredWhere: "Site property boundary (场界)",
+    distanceBuiltIn:
+      "No — the flat 70/55 dB figure carries no information about how far the nearest resident actually lives",
     penalty: "¥10,000–100,000 for unauthorised night work",
     penaltyUsd: 14000,
     posture: "reactive",
@@ -141,6 +154,8 @@ export const jurisdictions: Jurisdiction[] = [
       night: 85,
       note: "A single uniform 85 dB(A) boundary-line ceiling for specified construction work, applied across both zone tiers — blunter and less finely tiered than Singapore's matrix.",
     },
+    measuredWhere: "Site boundary line (敷地境界線)",
+    distanceBuiltIn: "No — the flat 85 dB(A) figure applies regardless of receptor distance",
     penalty:
       "Fine applies only for failing to file advance notice, filing falsely, or defying an improvement order — not for the initial breach",
     penaltyUsd: null,
@@ -168,6 +183,8 @@ export const jurisdictions: Jurisdiction[] = [
       night: 70,
       note: "Maximum instantaneous levels by zone class 1–4: up to 100 dB by day, tapering through 80–85 dB in the evening to 70–75 dB at night, alongside an equivalent-level (Leq) limit.",
     },
+    measuredWhere: "Facility boundary (周界)",
+    distanceBuiltIn: "No — the zone-class limit applies at the boundary, not by receptor distance",
     penalty: "Complaint-triggered fines, plus a preventive permit blacklist in Taipei/New Taipei",
     penaltyUsd: null,
     posture: "reactive",
@@ -220,6 +237,9 @@ export const jurisdictions: Jurisdiction[] = [
       night: 35,
       note: "Indexed to statutory land-use zoning: purely residential 50/35, general residential 55/40, mixed-use 60/45, commercial 65/50, industrial 70 by day, hospitals and spa zones 45/35. Exceeding the zone limit by more than 5 dB(A) obliges the authority to order mitigation.",
     },
+    measuredWhere: "Calculated at the nearest affected window (maßgeblicher Immissionsort)",
+    distanceBuiltIn:
+      "Yes — distance is a direct term in the calculation formula (Dₛ = 20·log₁₀(s) + 11), applied to every individually nearest building however far it sits",
     penalty: "Mitigation order once the measured rating level exceeds the zone limit by >5 dB(A)",
     penaltyUsd: null,
     posture: "reactive",
@@ -246,6 +266,8 @@ export const jurisdictions: Jurisdiction[] = [
       night: null,
       note: 'No UK-wide statutory decibel limit. Compliance is judged against "best practicable means", informed by the voluntary BS 5228 code, which often applies a relative threshold of roughly 10 dB above background.',
     },
+    measuredWhere: "Predicted at the receiver via the BS 5228 methodology; no fixed legal ceiling",
+    distanceBuiltIn: "Yes — distance is a direct term in every predictive assessment",
     penalty: "Up to £20,000 per offence, plus a daily penalty for breaching an abatement notice",
     penaltyUsd: null,
     posture: "reactive",
@@ -272,6 +294,8 @@ export const jurisdictions: Jurisdiction[] = [
       night: null,
       note: "Relative, not absolute: ≤10 dB above background (LAeq 15-min) in standard hours, ≤5 dB outside them. Its force comes from being written into development-consent conditions project by project.",
     },
+    measuredWhere: "Predicted at the receiver via the BS 5228 methodology; no fixed legal ceiling",
+    distanceBuiltIn: "Yes — distance is a direct term in every predictive assessment",
     penalty: "Enforced through consent conditions by the EPA and local councils",
     penaltyUsd: null,
     posture: "reactive",
@@ -298,6 +322,9 @@ export const jurisdictions: Jurisdiction[] = [
       night: 75,
       note: "No daytime cap at all. After-hours work is capped at 75 dBA within 200 feet of a residence, phased down from 85 dB between 2018 and 2020; a 2018 reform lets inspectors measure from the street and issue stop-work orders.",
     },
+    measuredWhere: "Explicit fixed radius from the residence",
+    distanceBuiltIn:
+      "Yes — the rule itself is a distance-dB pair: 75 dB(A) within 200 feet (≈61m) of a residence",
     penalty: "City-issued violations; no national penalty schedule exists",
     penaltyUsd: null,
     posture: "reactive",
